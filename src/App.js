@@ -21,7 +21,16 @@ const useStyles = makeStyles(theme => ({
     height: '500px',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  calculateButton: {
+    margin: theme.spacing()
+  },
+  footer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0
+  },
 }));
 
 export default function App() {
@@ -56,11 +65,20 @@ export default function App() {
           {AVERAGE_FRY_LENGTH.map((afl, index) => <MenuItem value={index}>{afl.short}</MenuItem>)}
         </Select>
       </div>
-      <Button onClick={handleCalculateClick}>Calculate</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleCalculateClick}
+        className={classes.calculateButton}
+      >
+        Calculate
+      </Button>
       <Typography>{distanceInFries}</Typography>
-      <Link href="http://web.mit.edu/rsi/www/2014/files/MiniSamples/Fry/frymain.pdf">
-        MIT Research for average McDonald's fry length
-      </Link>
+      <div className={classes.footer}>
+        <Link href="http://web.mit.edu/rsi/www/2014/files/MiniSamples/Fry/frymain.pdf">
+          MIT Research for average McDonald's fry length
+        </Link>
+      </div>
     </div>
 	);
 }
