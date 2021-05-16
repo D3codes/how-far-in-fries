@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useEffect, useMemo } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import {
-	AppBar, CssBaseline, makeStyles, Toolbar, Typography, TextField
+	makeStyles, Typography, TextField
 } from '@material-ui/core';
 
 const AVERAGE_FRY_LENGTH = 58.9; // mm
@@ -21,7 +21,7 @@ export default function App() {
 	return (
     <Fragment>
         <TextField value={distance} onChange={onDistanceChange}>Distance (in mm)</TextField>
-        <p>Distance in fries: {distanceInFries}</p>
+        <Typography className={classes.test}>Distance in fries: {distanceInFries}</Typography>
     </Fragment>
 	);
 }
