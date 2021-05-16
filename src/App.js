@@ -36,7 +36,8 @@ export default function App() {
   };
 
   const handleCalculateClick = () => {
-    setDistanceInFries((distance / AVERAGE_FRY_LENGTH[units].length).toFixed(2));
+    const DIF = (distance / AVERAGE_FRY_LENGTH[units].length).toFixed(2);
+    setDistanceInFries(`${distance} ${AVERAGE_FRY_LENGTH[units].unit} is ${DIF} McDonald's french fries`);
   };
 
   const handleUnitsChange = event => {
@@ -56,9 +57,7 @@ export default function App() {
         </Select>
       </div>
       <Button onClick={handleCalculateClick}>Calculate</Button>
-      {distanceInFries && (
-        <Typography>{distance} {AVERAGE_FRY_LENGTH[units].unit} is {distanceInFries} McDonald's french fries</Typography>
-      )}
+      <Typography>{distanceInFries}</Typography>
       <Link href="http://web.mit.edu/rsi/www/2014/files/MiniSamples/Fry/frymain.pdf">
         MIT Research for average McDonald's fry length
       </Link>
