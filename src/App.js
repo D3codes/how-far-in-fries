@@ -38,19 +38,19 @@ export default function App() {
 
   const [distance, setDistance] = useState(0);
   const [distanceInFries, setDistanceInFries] = useState(null);
-  const [units, setUnits] = useState(0);
+  const [selectedUnit, setSelectedUnit] = useState(0);
 
   const handleDistanceChange = event => {
     setDistance(event.target.value);
   };
 
   const handleCalculateClick = () => {
-    const DIF = (distance / AVERAGE_FRY_LENGTH[units].length).toFixed(2);
-    setDistanceInFries(`${distance} ${AVERAGE_FRY_LENGTH[units].unit} is ${DIF} McDonald's french fries`);
+    const DIF = (distance / AVERAGE_FRY_LENGTH[selectedUnit].length).toFixed(2);
+    setDistanceInFries(`${distance} ${AVERAGE_FRY_LENGTH[selectedUnit].unit} is ${DIF} McDonald's french fries`);
   };
 
   const handleUnitsChange = event => {
-    setUnits(event.target.value);
+    setSelectedUnit(event.target.value);
   };
 
 	return (
@@ -59,7 +59,7 @@ export default function App() {
       <div>
         <TextField value={distance} onChange={handleDistanceChange} type="number"/>
         <Select
-          value={units}
+          value={selectedUnit}
           onChange={handleUnitsChange}
         >
           {AVERAGE_FRY_LENGTH.map((afl, index) => <MenuItem value={index}>{afl.short}</MenuItem>)}
