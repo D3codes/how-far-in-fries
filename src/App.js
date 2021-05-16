@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState, useEffect, useMemo } from 'react';
+import {
+	AppBar, CssBaseline, makeStyles, Toolbar, Typography, TextField
+} from '@material-ui/core';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const AVERAGE_FRY_LENGTH = 58.9; // mm
+
+const useStyles = makeStyles(theme => ({
+}));
+
+export default function App() {
+	const classes = useStyles();
+
+  const [distance, setDistance] = useState(0);
+  const distanceInFries = useMemo(() => (distance / AVERAGE_FRY_LENGTH), [distance]);
+
+  const onDistanceChange = event => {
+    setDistance(event.target.value);
+  };
+
+	return (
+    <Fragment>
+        <TextField value={distance} onChange={onDistanceChange}>Distance (in mm)</TextField>
+        <p>Distance in fries: {distanceInFries}</p>
+    </Fragment>
+	);
 }
-
-export default App;
