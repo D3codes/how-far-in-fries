@@ -4,13 +4,13 @@ import {
 } from '@material-ui/core';
 
 const AVERAGE_FRY_LENGTH = [
-  58.9,        // mm
-  5.89,        // cm
-  2.32,        // in
-  0.19,        // ft
-  0.0589,      // m
-  0.0000589,   // km
-  0.000037,    // mi
+  {unit: "millimeters", length: 58.9, short: "mm"},
+  {unit: "centimeters", length: 5.89, short: "cm"},
+  {unit: "inches", length: 2.32, short: "in"},
+  {unit: "feet", length: 0.19, short: "ft"},
+  {unit: "meters", length: 0.0589, short: "m"},
+  {unit: "kilometers", length: 0.0000589, short: "km"},
+  {unit: "miles", length: 0.000037, short: "mi"},
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +36,7 @@ export default function App() {
   };
 
   const handleCalculateClick = () => {
-    setDistanceInFries((distance / AVERAGE_FRY_LENGTH[units]).toFixed(2));
+    setDistanceInFries((distance / AVERAGE_FRY_LENGTH[units].length).toFixed(2));
   };
 
   const handleUnitsChange = event => {
@@ -52,17 +52,13 @@ export default function App() {
           value={units}
           onChange={handleUnitsChange}
         >
-          <MenuItem value={0}>mm</MenuItem>
-          <MenuItem value={1}>cm</MenuItem>
-          <MenuItem value={2}>in</MenuItem>
-          <MenuItem value={3}>ft</MenuItem>
-          <MenuItem value={4}>m</MenuItem>
-          <MenuItem value={5}>km</MenuItem>
-          <MenuItem value={6}>mi</MenuItem>
+          {AVERAGE_FRY_LENGTH.map((afl, index) => <MenuItem value={index}>{afl.short}</MenuItem>)}
         </Select>
       </div>
       <Button onClick={handleCalculateClick}>Calculate</Button>
-      {distanceInFries && <Typography>Distance in fries: {distanceInFries} McDonald's french fries</Typography>}
+      {distanceInFries && (
+        <Typography>{distance} {AVERAGE_FRY_LENGTH[units].unit} is {distanceInFries} McDonald's french fries</Typography>
+      )}
       <Link href="http://web.mit.edu/rsi/www/2014/files/MiniSamples/Fry/frymain.pdf">
         MIT Research for average McDonald's fry length
       </Link>
